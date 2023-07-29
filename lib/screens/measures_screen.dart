@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MeasurementScreen extends StatefulWidget {
-  MeasurementScreen({Key? key}) : super(key: key);
+  const MeasurementScreen({Key? key}) : super(key: key);
 
   @override
   State<MeasurementScreen> createState() => _MeasurementScreenState();
@@ -10,6 +10,8 @@ class MeasurementScreen extends StatefulWidget {
 class _MeasurementScreenState extends State<MeasurementScreen> {
   final _weightController = TextEditingController();
   final _heightController = TextEditingController();
+
+  void _onSubmit() {}
 
   @override
   void dispose() {
@@ -79,22 +81,8 @@ class _MeasurementScreenState extends State<MeasurementScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                OutlinedButton(
-                  onPressed: () {
-                    setState(() {
-                      _heightController.value
-                          .replaced(TextRange(start: 0, end: 1), '0');
-                      _weightController.value
-                          .replaced(TextRange(start: 0, end: 100), '0');
-                    });
-                  },
-                  child: const Text('Reset'),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: _onSubmit,
                   child: const Text('Submit'),
                 ),
               ],
