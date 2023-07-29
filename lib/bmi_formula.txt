@@ -1,0 +1,3 @@
+
+
+BMI = masa ciała (kg)/ (wzrost (m)^2)
