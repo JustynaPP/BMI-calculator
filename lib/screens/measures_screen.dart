@@ -13,13 +13,28 @@ class _MeasurementScreenState extends State<MeasurementScreen> {
   final _weightController = TextEditingController();
   final _heightController = TextEditingController();
 
+  void _dialog() {
+    showDialog(
+      context: context,
+      builder: (context) => const AlertDialog(
+        title: Text(
+            'Invalid input, enter Your weight in kilograms and height in meters'),
+      ),
+    );
+  }
+
   void _onSubmit() {
-    final savedWeight = _weightController.text;
-    final savedHeight = _heightController.text;
-    final parsedWeight = num.tryParse(savedWeight);
-    final parsedHeigh = num.tryParse(savedHeight);
-    final poweredHeight = pow(parsedHeigh!, 2);
-    final result = (parsedWeight! / poweredHeight).round();
+    final savedWeight = num.tryParse(_weightController.text);
+    final savedHeight = num.tryParse(_heightController.text);
+    final invalidMeasurements = savedWeight == null ||
+        savedWeight <= 0 ||
+        savedHeight == null ||
+        savedHeight <= 0;
+    if (invalidMeasurements) {
+      _dialog();
+    }
+    final poweredHeight = pow(savedHeight!, 2);
+    final result = (savedWeight! / poweredHeight).round();
     Navigator.of(context)
         .push(
       MaterialPageRoute(
