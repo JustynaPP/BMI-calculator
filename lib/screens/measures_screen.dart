@@ -1,4 +1,6 @@
+import 'package:bmi/screens/result_screen.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class MeasurementScreen extends StatefulWidget {
   const MeasurementScreen({Key? key}) : super(key: key);
@@ -11,7 +13,26 @@ class _MeasurementScreenState extends State<MeasurementScreen> {
   final _weightController = TextEditingController();
   final _heightController = TextEditingController();
 
-  void _onSubmit() {}
+  void _onSubmit() {
+    final savedWeight = _weightController.text;
+    final savedHeight = _heightController.text;
+    final parsedWeight = num.tryParse(savedWeight);
+    final parsedHeigh = num.tryParse(savedHeight);
+    final poweredHeight = pow(parsedHeigh!, 2);
+    final result = (parsedWeight! / poweredHeight).round();
+    Navigator.of(context)
+        .push(
+      MaterialPageRoute(
+        builder: (context) => Result(
+          result: result.toString(),
+        ),
+      ),
+    )
+        .then((value) {
+      _weightController.clear();
+      _heightController.clear();
+    });
+  }
 
   @override
   void dispose() {

@@ -1,10 +1,44 @@
 import 'package:flutter/material.dart';
 
 class Result extends StatelessWidget {
-  const Result({Key? key}) : super(key: key);
+  const Result({Key? key, required this.result}) : super(key: key);
+  final String result;
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Your Result'),
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                'Your BMI:',
+                style: TextStyle(fontSize: 20),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                result,
+                style: const TextStyle(fontSize: 20),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Return'))
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
