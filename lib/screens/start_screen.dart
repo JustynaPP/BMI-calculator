@@ -9,15 +9,18 @@ class StartScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Container(
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: ElevatedButton(
-            style: ButtonStyle(
+            style: const ButtonStyle(
               backgroundColor: MaterialStatePropertyAll<Color>(
                   Color.fromARGB(255, 218, 161, 228)),
             ),
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => MeasurementScreen()));
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => const MeasurementScreen(),
+                ),
+              );
             },
             child: const Text('Start'),
           ),

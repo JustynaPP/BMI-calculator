@@ -2,6 +2,8 @@ import 'package:bmi/screens/result_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import '../data/bmi_standards.dart';
+
 class MeasurementScreen extends StatefulWidget {
   const MeasurementScreen({Key? key}) : super(key: key);
 
@@ -23,6 +25,22 @@ class _MeasurementScreenState extends State<MeasurementScreen> {
     );
   }
 
+  String bmiStatus = '';
+
+  String getBMIStatus(int bmi) {
+    resultStatusMap;
+
+    for (var entry in resultStatusMap.entries) {
+      if (bmi <= entry.key) {
+        bmiStatus = entry.value;
+        break;
+      } else {
+        bmiStatus = 'Severe obese';
+      }
+    }
+    return bmiStatus;
+  }
+
   void _onSubmit() {
     final savedWeight = num.tryParse(_weightController.text);
     final savedHeight = num.tryParse(_heightController.text);
@@ -35,11 +53,14 @@ class _MeasurementScreenState extends State<MeasurementScreen> {
     }
     final poweredHeight = pow(savedHeight!, 2);
     final result = (savedWeight! / poweredHeight).round();
+    String bmiStatus = getBMIStatus(result);
+
     Navigator.of(context)
         .push(
       MaterialPageRoute(
         builder: (context) => Result(
           result: result.toString(),
+          description: bmiStatus,
         ),
       ),
     )
