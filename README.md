@@ -1,6 +1,6 @@
 # BMI
 
 A simple BMI calculator.
-This code is not finished.
+With result and few words about weight conditon.
 
 
