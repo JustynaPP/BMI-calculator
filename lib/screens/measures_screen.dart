@@ -35,7 +35,7 @@ class _MeasurementScreenState extends State<MeasurementScreen> {
         bmiStatus = entry.value;
         break;
       } else {
-        bmiStatus = 'Severe obese';
+        bmiStatus = 'Severe obese (Obese class III)';
       }
     }
     return bmiStatus;
