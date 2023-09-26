@@ -47,27 +47,29 @@ class _MeasurementScreenState extends State<MeasurementScreen> {
     final invalidMeasurements = savedWeight == null ||
         savedWeight <= 0 ||
         savedHeight == null ||
-        savedHeight <= 0;
+        savedHeight <= 0 ||
+        savedHeight >= 2.5;
     if (invalidMeasurements) {
       _dialog();
-    }
-    final poweredHeight = pow(savedHeight!, 2);
-    final result = (savedWeight! / poweredHeight).round();
-    String bmiStatus = getBMIStatus(result);
+    } else {
+      final poweredHeight = pow(savedHeight, 2);
+      final result = (savedWeight / poweredHeight).round();
+      String bmiStatus = getBMIStatus(result);
 
-    Navigator.of(context)
-        .push(
-      MaterialPageRoute(
-        builder: (context) => Result(
-          result: result.toString(),
-          description: bmiStatus,
+      Navigator.of(context)
+          .push(
+        MaterialPageRoute(
+          builder: (context) => Result(
+            result: result.toString(),
+            description: bmiStatus,
+          ),
         ),
-      ),
-    )
-        .then((value) {
-      _weightController.clear();
-      _heightController.clear();
-    });
+      )
+          .then((value) {
+        _weightController.clear();
+        _heightController.clear();
+      });
+    }
   }
 
   @override
